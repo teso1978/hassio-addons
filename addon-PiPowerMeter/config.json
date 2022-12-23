@@ -1,11 +1,12 @@
 {
     "name": "PiPowerMeter based Hass.io addons",
-    "version": "0.0025",
+    "version": "0.0026",
     "arch": ["armhf", "armv7", "aarch64"],
     "slug": "pipowermeter_hassio",
     "description": "PiPowerMeter based Hass.io addons",
     "startup": "application",
     "init": false,
+    "ingress": true,
     "ports": {
       "3000/tcp": 3000
     },
