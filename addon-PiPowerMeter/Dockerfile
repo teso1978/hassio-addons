@@ -28,13 +28,13 @@ RUN \
 RUN apk add --no-cache \
         git=2.38.2-r0 \
         icu-data-full=72.1-r1 \
- #       nodejs=18.12.1-r0 \
+        nodejs=16.19.0 \
         npm=9.1.2-r0 \
         openssh-client=9.1_p1-r1 \
         patch=2.7.6-r8 \
         wiringpi 
 
-COPY node /usr/local/
+# COPY node /usr/local/
 
       
 RUN npm install \
@@ -44,14 +44,14 @@ RUN npm install \
         --omit=dev \
         --unsafe-perm \
     \
-    && npm cache clear --force \
-    \
-    && apk del --no-cache --purge .build-dependencies \
-    && rm -fr \
-        /root/.cache \
-        #/root/.npm \
-        /root/.nrpmrc \
-        /tmp/*
+    # && npm cache clear --force \
+    # \
+    # && apk del --no-cache --purge .build-dependencies \
+    # && rm -fr \
+    #     /root/.cache \
+    #     #/root/.npm \
+    #     /root/.nrpmrc \
+    #     /tmp/*
   
 
 
