@@ -25,6 +25,17 @@ set +e
       else
         echo "adding $config to $partition config.txt"
         echo "$config">>/tmp/$partition/config.txt
+        
+      fi
+      if [ $(grep "$config2" /tmp/$partition/config.txt|grep -v \#) ]; then
+        echo "serial already configured on $partition";
+      else
+        echo "adding $config2 to $partition config.txt"
+        echo "$config2">>/tmp/$partition/config.txt
+      fi
+      if [ -e /tmp/$partition/cmdline.txt ]; then
+        sed -i /tmp/$partition/cmdline.txt -e "s/console=ttyAMA0,[0-9]\+ //"
+        sed -i /tmp/$partition/cmdline.txt -e "s/console=serial0,[0-9]\+ //"
       fi
     else
       echo "no $partition config found"

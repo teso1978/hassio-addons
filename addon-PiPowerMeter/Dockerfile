@@ -35,7 +35,7 @@ RUN apk add --no-cache \
         wget
 RUN cd /tmp
 RUN wget https://project-downloads.drogon.net/wiringpi-latest.deb
-RUN apt install ./wiringpi-latest.deb
+RUN apt install -y ./wiringpi-latest.deb
 
 COPY node /usr/local/
 
