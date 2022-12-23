@@ -33,10 +33,8 @@ RUN apk add --no-cache \
         openssh-client=9.1_p1-r1 \
         patch=2.7.6-r8 \
         wget
-RUN cd /tmp
-RUN wget https://project-downloads.drogon.net/wiringpi-latest.deb
-RUN dpkg -i ./wiringpi-latest.deb
-
+RUN sed -i "s/v[0-9.]*\/community/edge\/community/" /etc/apk/repositories \
+    && apk update && apk add wiringpi
 COPY node /usr/local/
 
 RUN cd /app      
