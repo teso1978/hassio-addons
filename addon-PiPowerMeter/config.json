@@ -5,7 +5,7 @@
     "slug": "pipowermeter_hassio",
     "description": "PiPowerMeter based Hass.io addons",
     "startup": "application",
-    "boot": "auto",
+    "init": false,
     "ports": {
       "3000/tcp": 3000
     },
