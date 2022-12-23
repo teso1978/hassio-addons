@@ -52,6 +52,7 @@ RUN apk add --no-cache \
 
 COPY node /usr/local/
 
+COPY public /app/public
 
 # Copy data for add-on
 COPY run.sh /
