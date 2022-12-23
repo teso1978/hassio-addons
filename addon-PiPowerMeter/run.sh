@@ -8,7 +8,7 @@ echo Hello!
 cd /app
 node -v
 npm -v
-sleep 5m
+sleep 99999
 #npm install
 #node server.js
 #forever start --workingDir /app -a -o /dev/null -e /nodejs.err.log --killSignal=SIGTERM /app/server.js
