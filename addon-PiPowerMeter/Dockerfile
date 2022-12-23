@@ -2,7 +2,7 @@ ARG BUILD_FROM
 FROM ${BUILD_FROM}
 
 ENV LANG C.UTF-8
-
+ENV DEBIAN_FRONTEND noninteractive
 
 # Copy root filesystem
 COPY rootfs /app
@@ -35,7 +35,7 @@ RUN apk add --no-cache \
         wget
 RUN cd /tmp
 RUN wget https://project-downloads.drogon.net/wiringpi-latest.deb
-RUN apt install -y ./wiringpi-latest.deb
+RUN dpkg -i ./wiringpi-latest.deb
 
 COPY node /usr/local/
 
