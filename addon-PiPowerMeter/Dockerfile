@@ -24,18 +24,17 @@ RUN \
         make=4.3-r1 \
         py3-pip=22.3.1-r1 \
         python3-dev=3.10.9-r1 \
-        python3=3.10.9-r1 \
-    \
-    && apk add --no-cache \
+        python3=3.10.9-r1 
+RUN apk add --no-cache \
         git=2.38.2-r0 \
         icu-data-full=72.1-r1 \
         nodejs=18.12.1-r0 \
         npm=9.1.2-r0 \
         openssh-client=9.1_p1-r1 \
         patch=2.7.6-r8 \
-        #wiringpi    \
-    \
-    && npm install \
+        wiringpi   
+         
+RUN npm install \
         --no-audit \
         --no-fund \
         --no-update-notifier \
