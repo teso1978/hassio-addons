@@ -1,6 +1,6 @@
 {
     "name": "PiPowerMeter based Hass.io addons",
-    "version": "0.006",
+    "version": "0.007",
     "arch": ["armhf", "armv7"],
     "slug": "pipowermeter_hassio",
     "description": "PiPowerMeter based Hass.io addons",
