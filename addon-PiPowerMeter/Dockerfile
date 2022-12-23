@@ -33,24 +33,26 @@ RUN apk add --no-cache \
         openssh-client=9.1_p1-r1 \
         patch=2.7.6-r8 \
         wiringpi   
-
-# RUN npm install \
-#         --no-audit \
-#         --no-fund \
-#         --no-update-notifier \
-#         --omit=dev \
-#         --unsafe-perm \
-#     \
-#     && npm cache clear --force \
-#     \
-#     && apk del --no-cache --purge .build-dependencies \
-#     && rm -fr \
-#         /root/.cache \
-#         /root/.npm \
-#         /root/.nrpmrc \
-#         /tmp/*
-
 COPY node /usr/local/
+
+      
+RUN npm install \
+        --no-audit \
+        --no-fund \
+        --no-update-notifier \
+        --omit=dev \
+        --unsafe-perm \
+    \
+    && npm cache clear --force \
+    \
+    && apk del --no-cache --purge .build-dependencies \
+    && rm -fr \
+        /root/.cache \
+        #/root/.npm \
+        /root/.nrpmrc \
+        /tmp/*
+  
+
 
 COPY public /app/public
 
