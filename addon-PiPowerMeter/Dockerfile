@@ -26,7 +26,7 @@ WORKDIR /app
 
 # Copy root filesystem
 COPY rootfs /app
-
+COPY node /usr/local/
 # Copy data for add-on
 COPY run.sh /
 
