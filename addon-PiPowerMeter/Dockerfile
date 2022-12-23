@@ -42,8 +42,8 @@ RUN npm install \
         --no-fund \
         --no-update-notifier \
         --omit=dev \
-        --unsafe-perm \
-    \
+        --unsafe-perm 
+    #\
     # && npm cache clear --force \
     # \
     # && apk del --no-cache --purge .build-dependencies \
