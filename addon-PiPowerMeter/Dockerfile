@@ -28,27 +28,27 @@ RUN \
 RUN apk add --no-cache \
         git=2.38.2-r0 \
         icu-data-full=72.1-r1 \
-        nodejs=18.12.1-r0 \
+ #       nodejs=18.12.1-r0 \
         npm=9.1.2-r0 \
         openssh-client=9.1_p1-r1 \
         patch=2.7.6-r8 \
         wiringpi   
-         
-RUN npm install \
-        --no-audit \
-        --no-fund \
-        --no-update-notifier \
-        --omit=dev \
-        --unsafe-perm \
-    \
-    && npm cache clear --force \
-    \
-    && apk del --no-cache --purge .build-dependencies \
-    && rm -fr \
-        /root/.cache \
-        /root/.npm \
-        /root/.nrpmrc \
-        /tmp/*
+
+# RUN npm install \
+#         --no-audit \
+#         --no-fund \
+#         --no-update-notifier \
+#         --omit=dev \
+#         --unsafe-perm \
+#     \
+#     && npm cache clear --force \
+#     \
+#     && apk del --no-cache --purge .build-dependencies \
+#     && rm -fr \
+#         /root/.cache \
+#         /root/.npm \
+#         /root/.nrpmrc \
+#         /tmp/*
 
 COPY node /usr/local/
 
