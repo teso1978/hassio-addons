@@ -21,8 +21,5 @@
     "config":{
         "unsafe-perm":true
     },
-    "scripts": {
-        "postinstall": "/bin/bash ./install.sh"
-    },
     "engines": { "node": ">=0.10.28" }   
 }
