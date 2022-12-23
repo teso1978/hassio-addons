@@ -1,5 +1,5 @@
-ARG BUILD_FROM
-FROM $BUILD_FROM
+#ARG BUILD_FROM
+FROM ghcr.io/home-assistant/armv7-base-python:3.10-alpine3.16
 
 ENV LANG C.UTF-8
 
@@ -16,12 +16,12 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Setup base
 RUN \
-    apk add --no-cache --virtual .build-dependencies 
-        # g++=12.2.1_git20220924-r4 \
-        # gcc=12.2.1_git20220924-r4 \
-        # libc-dev=0.7.2-r3 \
-        # linux-headers=5.19.5-r0 \
-        # make=4.3-r1 \
+    apk add --no-cache --virtual .build-dependencies \
+        g++=12.2.1_git20220924-r4 \
+        gcc=12.2.1_git20220924-r4 \
+        libc-dev=0.7.2-r3 \
+        linux-headers=5.19.5-r0 \
+        make=4.3-r1 
     #     py3-pip=22.3.1-r1 \
     #     python3-dev=3.10.9-r1 \
     #     python3=3.10.9-r1 \
