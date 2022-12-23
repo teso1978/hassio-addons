@@ -11,15 +11,15 @@ RUN \
     apt update         &&   \
     apt upgrade -y     &&   \
     apt install -y          \
-        g++=12.2.1_git20220924-r4 \
-        gcc=12.2.1_git20220924-r4 \
-        libc-dev=0.7.2-r3 \
-        make=4.3-r1 \
-        py3-pip=22.3.1-r1 \
-        python3-dev=3.10.9-r1 \
-        python3=3.10.9-r1 \
-        git=2.30.2 \
-        wiringpi=2.52
+        g++ \
+        gcc \
+        libc-dev\
+        make \
+        py3-pip \
+        python3-dev \
+        python3 \
+        git \
+        wiringpi
 
 
 WORKDIR /app
