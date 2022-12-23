@@ -1,0 +1,17 @@
+{
+    "name": "PiPowerMeter based Hass.io addons",
+    "version": "0.001",
+    "arch": ["armhf", "armv7"],
+    "slug": "pipowermeter_hassio",
+    "description": "PiPowerMeter based Hass.io addons",
+    "startup": "application",
+    "boot": "auto",
+    "ports": {
+      "3000/tcp": 3000
+    },
+    "map": [
+      "share:rw"
+    ],
+    "options": {},
+    "schema": {}
+  }
