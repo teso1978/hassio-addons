@@ -20,37 +20,26 @@ RUN apt update         && \
     apt install -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"     \
         g++             \
         gcc            \
-        bsdutils              \
-        file                  \
-        openssl               \
-        ca-certificates       \
-        ssh                   \
         wget                  \
-        patch                 \
         sudo                  \
         htop                  \
-        dstat                 \
-        vim                   \
-        tmux                  \
-        curl                  \
         git                   \
-        jq                    \
-        zsh                   \
-        ksh                   \
-        xz-utils              \
         build-essential       \
-        python3-pip           \
-        python3-dev           \
+        python3-pkg-resources \
         python3               \
+        npm                   \
+        node                  \
+        make                  \
+        wiringpi              \
         bash-completion       && \
     apt-get clean
 
 
-RUN cd /tmp
-RUN wget https://github.com/guation/WiringPi-arm64/releases/download/2.61-g/wiringpi-2.61-g.deb
-RUN dpkg -i wiringpi-2.61-g.deb
+#RUN cd /tmp
+#RUN wget https://github.com/guation/WiringPi-arm64/releases/download/2.61-g/wiringpi-2.61-g.deb
+#RUN dpkg -i wiringpi-2.61-g.deb
 
-COPY node /usr/local/
+#COPY node /usr/local/
 
 RUN cd /app      
 RUN npm install \
