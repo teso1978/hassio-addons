@@ -33,7 +33,7 @@ RUN apk add --no-cache \
         openssh-client=9.1_p1-r1 \
         patch=2.7.6-r8 \
         wget \
-        gdebi-core
+        dpkg
 
 RUN cd /tmp
 RUN wget https://project-downloads.drogon.net/wiringpi-latest.deb
