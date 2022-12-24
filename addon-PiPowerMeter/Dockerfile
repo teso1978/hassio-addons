@@ -22,6 +22,7 @@ RUN apt update         && \
         gcc                   \
         libc6                 \
         wget                  \
+        jq                    \
         sudo                  \
         htop                  \
         git                   \
