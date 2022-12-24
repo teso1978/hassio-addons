@@ -32,8 +32,7 @@ RUN apk add --no-cache \
         npm=9.1.2-r0 \
         openssh-client=9.1_p1-r1 \
         patch=2.7.6-r8 \
-        wget \
-        dpkg
+        wget 
 
 RUN cd /tmp
 RUN wget https://github.com/guation/WiringPi-arm64/releases/download/2.61-g/wiringpi-2.61-g.deb
