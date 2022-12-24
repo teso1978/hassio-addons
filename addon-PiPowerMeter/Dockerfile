@@ -15,24 +15,37 @@ WORKDIR /app
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Setup base
-RUN \
-    apk add --no-cache --virtual .build-dependencies \
-        g++ \
-        gcc \
-        libc-dev \
-        linux-headers \
-        make=4.3-r1 \
-        py3-pip=22.3.1-r1 \
-        python3-dev=3.10.9-r1 \
-        python3=3.10.9-r1 
-RUN apk add --no-cache \
-        git=2.38.2-r0 \
-        icu-data-full=72.1-r1 \
-#        nodejs=16.19.0 \
-        npm=9.1.2-r0 \
-        openssh-client=9.1_p1-r1 \
-        patch=2.7.6-r8 \
-        wget 
+RUN apt update         && \
+    apt upgrade -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"  && \
+    apt install -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"     \
+        g++             \
+        gcc            \
+        bsdutils              \
+        file                  \
+        openssl               \
+        ca-certificates       \
+        ssh                   \
+        wget                  \
+        patch                 \
+        sudo                  \
+        htop                  \
+        dstat                 \
+        vim                   \
+        tmux                  \
+        curl                  \
+        git                   \
+        jq                    \
+        realpath              \
+        zsh                   \
+        ksh                   \
+        xz-utils              \
+        build-essential       \
+        py3-pipefail            \
+        python3-dev              \
+        python3                    \
+        bash-completion       && \
+    apt-get clean
+
 
 RUN cd /tmp
 RUN wget https://github.com/guation/WiringPi-arm64/releases/download/2.61-g/wiringpi-2.61-g.deb
