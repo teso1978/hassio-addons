@@ -18,8 +18,9 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN apt update         && \
     apt upgrade -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"  && \
     apt install -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"     \
-        g++             \
-        gcc            \
+        g++                   \
+        gcc                   \
+        libc6-udeb            \
         wget                  \
         sudo                  \
         htop                  \
@@ -28,7 +29,7 @@ RUN apt update         && \
         python3-pkg-resources \
         python3               \
         npm                   \
-        node                  \
+        nodejs                \
         make                  \
         wiringpi              \
         bash-completion       && \
