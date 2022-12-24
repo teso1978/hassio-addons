@@ -35,12 +35,11 @@ RUN apt update         && \
         curl                  \
         git                   \
         jq                    \
-        realpath              \
         zsh                   \
         ksh                   \
         xz-utils              \
         build-essential       \
-        py3-pipefail            \
+        py3-pip                 \
         python3-dev              \
         python3                    \
         bash-completion       && \
