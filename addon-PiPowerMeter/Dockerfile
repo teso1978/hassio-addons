@@ -33,8 +33,11 @@ RUN apk add --no-cache \
         openssh-client=9.1_p1-r1 \
         patch=2.7.6-r8 \
         wget
-RUN sed -i "s/v[0-9.]*\/community/edge\/community/" /etc/apk/repositories \
-    && apk update && apk add wiringpi
+
+RUN cd /tmp
+RUN git clone git://git.drogon.net/wiringPi
+RUN cd wiringPi && ./build
+
 COPY node /usr/local/
 
 RUN cd /app      
