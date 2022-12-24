@@ -34,7 +34,7 @@ RUN apk add --no-cache \
         patch=2.7.6-r8 
 
 RUN cd /tmp
-RUN git clone git://git.drogon.net/wiringPi
+RUN git clone --branch final_official_2.50 https://github.com/WiringPi/WiringPi.git /tmp/wiringpi
 RUN cd wiringPi && ./build
 
 COPY node /usr/local/
