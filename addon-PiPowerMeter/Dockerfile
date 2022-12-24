@@ -37,8 +37,8 @@ RUN apt update         && \
 
 
 RUN cd /tmp
-RUN wget https://github.com/guation/WiringPi-arm64/releases/download/2.61-g/wiringpi-2.61-g.deb
-RUN dpkg -i wiringpi-2.61-g.deb
+RUN wget https://github.com/WiringPi/WiringPi/releases/download/2.61-1/wiringpi-2.61-1-arm64.deb
+RUN dpkg -i wiringpi-2.61-1-arm64.deb
 
 #COPY node /usr/local/
 
