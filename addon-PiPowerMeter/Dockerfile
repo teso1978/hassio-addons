@@ -35,7 +35,7 @@ RUN apk add --no-cache \
 
 RUN cd /tmp
 RUN git clone --branch final_official_2.50 https://github.com/WiringPi/WiringPi.git /tmp/wiringpi
-RUN cd wiringPi && ./build
+RUN cd /tmp/WiringPi && ./build
 
 COPY node /usr/local/
 
