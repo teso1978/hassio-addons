@@ -31,8 +31,7 @@ RUN apk add --no-cache \
 #        nodejs=16.19.0 \
         npm=9.1.2-r0 \
         openssh-client=9.1_p1-r1 \
-        patch=2.7.6-r8 \
-        wget
+        patch=2.7.6-r8 
 
 RUN cd /tmp
 RUN git clone git://git.drogon.net/wiringPi
