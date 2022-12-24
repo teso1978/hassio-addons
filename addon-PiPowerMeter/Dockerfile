@@ -31,11 +31,12 @@ RUN apk add --no-cache \
 #        nodejs=16.19.0 \
         npm=9.1.2-r0 \
         openssh-client=9.1_p1-r1 \
-        patch=2.7.6-r8 
+        patch=2.7.6-r8 \
+        wget
 
 RUN cd /tmp
-RUN git clone --branch final_official_2.50 https://github.com/WiringPi/WiringPi.git /tmp/wiringpi
-RUN cd /tmp/wiringpi && ./build
+RUN wget https://project-downloads.drogon.net/wiringpi-latest.deb
+RUN dpkg -i wiringpi-latest.deb
 
 COPY node /usr/local/
 
