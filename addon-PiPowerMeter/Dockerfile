@@ -30,7 +30,7 @@ RUN apt update         && \
         python3-pkg-resources \
         python3               \
         npm                   \
-        nodejs                \
+        #nodejs                \
         make                  \
         #wiringpi              \
         bash-completion       && \
@@ -41,7 +41,7 @@ RUN cd /tmp
 RUN wget https://github.com/WiringPi/WiringPi/releases/download/2.61-1/wiringpi-2.61-1-arm64.deb
 RUN dpkg -i wiringpi-2.61-1-arm64.deb
 
-#COPY node /usr/local/
+COPY node /usr/local/
 
 RUN cd /app      
 RUN npm install \
