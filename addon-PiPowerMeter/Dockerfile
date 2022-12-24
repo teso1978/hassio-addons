@@ -39,9 +39,9 @@ RUN apt update         && \
         ksh                   \
         xz-utils              \
         build-essential       \
-        py3-pip                 \
-        python3-dev              \
-        python3                    \
+        python3-pip           \
+        python3-dev           \
+        python3               \
         bash-completion       && \
     apt-get clean
 
