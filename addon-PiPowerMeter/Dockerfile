@@ -20,7 +20,7 @@ RUN apt update         && \
     apt install -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"     \
         g++                   \
         gcc                   \
-        libc6-udeb            \
+        libc6                 \
         wget                  \
         sudo                  \
         htop                  \
@@ -31,13 +31,16 @@ RUN apt update         && \
         npm                   \
         nodejs                \
         make                  \
-        wiringpi              \
+        #wiringpi              \
         bash-completion       && \
     apt-get clean
 
 
-#RUN cd /tmp
+RUN cd /tmp
 #RUN wget https://github.com/guation/WiringPi-arm64/releases/download/2.61-g/wiringpi-2.61-g.deb
+
+RUN wget https://project-downloads.drogon.net/wiringpi-latest.deb
+RUN sudo dpkg -i wiringpi-latest.deb
 #RUN dpkg -i wiringpi-2.61-g.deb
 
 #COPY node /usr/local/
