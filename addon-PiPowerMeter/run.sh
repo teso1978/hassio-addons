@@ -17,4 +17,5 @@ npm install -g forever
 npm install --no-audit --no-fund --no-update-notifier --omit=dev --unsafe-perm 
 #sleep 99999
 #node server.js
-forever start --workingDir /app -a -o /dev/null -e /nodejs.err.log --killSignal=SIGTERM /app/server.js
+echo Starting server 
+#forever start --workingDir /app -a -o /dev/null -e /nodejs.err.log --killSignal=SIGTERM /app/server.js
