@@ -13,8 +13,8 @@ sudo cp -R $NVM_DIR/versions/node/$(nvm version)/* /usr/local/
 cd /app
 node -v
 npm -v
-
+npm install -g forever
 npm install --no-audit --no-fund --no-update-notifier --omit=dev --unsafe-perm 
-sleep 99999
+#sleep 99999
 #node server.js
-#forever start --workingDir /app -a -o /dev/null -e /nodejs.err.log --killSignal=SIGTERM /app/server.js
+forever start --workingDir /app -a -o /dev/null -e /nodejs.err.log --killSignal=SIGTERM /app/server.js

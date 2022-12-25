@@ -42,10 +42,14 @@ set +e
     fi
   }
 
+  setGpiomemToRW(){
+    chmod 660 /dev/gpiomem
+  }
+
   performWork sda1
   performWork sdb1
   performWork mmcblk0p1
-
+  setGpiomemToRW
   echo "This Configurator did it's job. Perform a hard-power-off now. You can uninstall and reboot now.  This configurator only works once."
   sleep 99999;
 done
