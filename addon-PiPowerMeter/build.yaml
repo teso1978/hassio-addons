@@ -1,6 +1,6 @@
 ---
 build_from:
-  aarch64: arm64v8/debian
+  aarch64: ghcr.io/hassio-addons/debian-base
   amd64: ghcr.io/hassio-addons/debian-base
   armhf: ghcr.io/hassio-addons/debian-base
   armv7: ghcr.io/hassio-addons/debian-base
