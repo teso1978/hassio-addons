@@ -5,6 +5,3 @@ build_from:
   armhf: ghcr.io/hassio-addons/debian-base
   armv7: ghcr.io/hassio-addons/debian-base
   i386: ghcr.io/hassio-addons/debian-base
-codenotary:
-  base_image: codenotary@frenck.dev
-  signer: codenotary@frenck.dev
