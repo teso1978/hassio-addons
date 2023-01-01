@@ -10,7 +10,24 @@ var netUtils = require('./utils.js');
 var fs = require("fs");
 var common = require("./common");
 var mqtt = null, mqttClient = null, mqttConnected = false;
-
+var ha_config1 = {"device_class": "voltage", "name": "Voltage", "state_topic": "homeassistant/sensor/PiPowerMeter/1/state", "unit_of_measurement": "V", "value_template": "{{ value_json.voltage}}" }
+var ha_config2 = {"device_class": "current", "name": "Current", "state_topic": "homeassistant/sensor/PiPowerMeter/1/state", "unit_of_measurement": "A", "value_template": "{{ value_json.current}}" }
+var ha_config3 = {"device_class": "power", "name": "Watts", "state_topic": "homeassistant/sensor/PiPowerMeter/1/state", "unit_of_measurement": "W", "value_template": "{{ value_json.watts}}" }
+var ha_config4 = {"device_class": "power", "name": "Vars", "state_topic": "homeassistant/sensor/PiPowerMeter/1/state", "unit_of_measurement": "VAr", "value_template": "{{ value_json.vars}}" }
+var ha_config5 = {"device_class": "none", "name": "PowerFactor", "state_topic": "homeassistant/sensor/PiPowerMeter/1/state", "unit_of_measurement": "", "value_template": "{{ value_json.pf}}" }
+var ha_config6 = {"device_class": "frequency", "name": "Frequency", "state_topic": "homeassistant/sensor/PiPowerMeter/1/state", "unit_of_measurement": "Hz", "value_template": "{{ value_json.frequency}}" }
+var ha_config7 = {"device_class": "energy", "name": "LastDaykWh", "state_topic": "homeassistant/sensor/PiPowerMeter/1/state", "unit_of_measurement": "kWh", "value_template": "{{ value_json.lastdaykwh}}" }
+var ha_config7 = {"device_class": "timestamp", "name": "TimeStamp", "state_topic": "homeassistant/sensor/PiPowerMeter/1/state", "unit_of_measurement": "", "value_template": "{{ value_json.timestamp}}" }
+var payload = {
+    "voltage" : 230.1,
+    "current" : 0.1,
+    "watts" : 0.1,
+    "vars" : 0.1,
+    "pf" : 1,
+    "frequency" : 50,
+    "lastdaykwh" : 1,
+    "timestamp" : 0
+}
 // load currently installed software version and check for updates every hour
 var exec = require('child_process').exec, softwareVersion = null;
 (function checkForUpdates() {
@@ -30,7 +47,7 @@ var exec = require('child_process').exec, softwareVersion = null;
                     var obj = { Installed: { Sha: currentSha, Timestamp: currentDate } };
 
                     // get latest commit from github
-                    exec("curl https://api.github.com/repos/crjens/pipowermeter/git/refs/heads/master", function (error, stdout, stderr) {
+                    exec("curl https://api.github.com/repos/teso1978/pipowermeter/git/refs/heads/master", function (error, stdout, stderr) {
                         if (error)
                             console.error('unable to fetch latest commit from github: ' + error);
                         else {
@@ -145,6 +162,10 @@ var loadConfiguration = function (callback) {
                     mqttClient.on('connect', function (o) {
                          console.log('Connected to mqtt: ' + data.Configuration.MqttServer + " : " + JSON.stringify(mqttOptions) + " - " + JSON.stringify(o));
                          mqttConnected = true;
+                         for (var i = 0; i < data.Circuits.length; i++) {
+                            ha_mqtt_send_conf(i);
+                         }
+                         ha_mqtt_send_conf();
                     });
 
                     mqttClient.on('error', function (error) {
@@ -173,6 +194,68 @@ var loadConfiguration = function (callback) {
         if (callback != null)
             callback(err, data.Configuration);
     });
+}
+
+var subscrise_to_ha = function() {
+    mqttClient.subscribe("homeassistant/#");
+}
+
+mqttClient.on('message', function (topic, rawMessage) {
+    try {
+        var msg = rawMessage.toString();
+        console.log("Received MQTT topic: " + topic.toString());
+
+        if (topic === "homeassistant/status") {
+            // Turn off radio player when TV is turned on
+            if (msg === "online") {
+                for (var i = 0; i < data.Circuits.length; i++) {
+                    ha_mqtt_send_conf(i);
+                }
+            }
+            console.log("Received message: " + msg);
+            return;
+        }
+
+        
+    } catch (e) {
+        console.log(e);
+    }
+});
+
+var ha_mqtt_send_conf = function(id) {
+    if (mqttClient != null && mqttConnected == true) {
+        try {
+            
+            var topic = 'homeassistant/sensor/PiPowerMeter/' + id + '/state';
+            var json = JSON.parse(ha_config1);
+            json.state_topic = topic;
+            mqttClient.publish('homeassistant/sensor/PiPowerMeter/' + id + '/config', json.stringify());
+            json = JSON.parse(ha_config2);
+            json.state_topic = topic;
+            mqttClient.publish('homeassistant/sensor/PiPowerMeter/' + id + '/config', json.stringify());
+            json = JSON.parse(ha_config3);
+            json.state_topic = topic;
+            mqttClient.publish('homeassistant/sensor/PiPowerMeter/' + id + '/config', json.stringify());
+            json = JSON.parse(ha_config4);
+            json.state_topic = topic;
+            mqttClient.publish('homeassistant/sensor/PiPowerMeter/' + id + '/config', json.stringify());
+            json = JSON.parse(ha_config5);
+            json.state_topic = topic;
+            mqttClient.publish('homeassistant/sensor/PiPowerMeter/' + id + '/config', json.stringify());
+            json = JSON.parse(ha_config6);
+            json.state_topic = topic;
+            mqttClient.publish('homeassistant/sensor/PiPowerMeter/' + id + '/config', json.stringify());
+            json = JSON.parse(ha_config7);
+            json.state_topic = topic;
+            mqttClient.publish('homeassistant/sensor/PiPowerMeter/' + id + '/config', json.stringify());
+            json = JSON.parse(ha_config8);
+            json.state_topic = topic;
+            mqttClient.publish('homeassistant/sensor/PiPowerMeter/' + id + '/config', json.stringify());
+        }
+        catch (err) {
+            console.error("Error writing to MQTT server: " + data.MqttServer + ".  Error: " + err);
+        }
+    }
 }
 
 var scheduleNextRollupMessage = function () {
