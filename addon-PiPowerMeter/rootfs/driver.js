@@ -163,9 +163,9 @@ var loadConfiguration = function (callback) {
                          console.log('Connected to mqtt: ' + data.Configuration.MqttServer + " : " + JSON.stringify(mqttOptions) + " - " + JSON.stringify(o));
                          mqttConnected = true;
                          for (var i = 0; i < data.Circuits.length; i++) {
-                            ha_mqtt_send_conf(i);
+                            ha_mqtt_send_conf(i+1);
                          }
-                         ha_mqtt_send_conf();
+                         
                     });
 
                     mqttClient.on('error', function (error) {
@@ -177,6 +177,27 @@ var loadConfiguration = function (callback) {
                     mqttClient.on('close', function () {
                          console.log('Closed mqtt');
                          mqttConnected = false;
+                    });
+                    mqttClient.on('message', function (topic, rawMessage) {
+                        try {
+                            var msg = rawMessage.toString();
+                            console.log("Received MQTT topic: " + topic.toString());
+                    
+                            if (topic === "homeassistant/status") {
+                                // Turn off radio player when TV is turned on
+                                if (msg === "online") {
+                                    for (var i = 0; i < data.Circuits.length; i++) {
+                                        ha_mqtt_send_conf(i+1);
+                                    }
+                                }
+                                console.log("Received message: " + msg);
+                                return;
+                            }
+                    
+                            
+                        } catch (e) {
+                            console.log(e);
+                        }
                     });
                 }
                 catch (err) {
@@ -200,27 +221,7 @@ var subscrise_to_ha = function() {
     mqttClient.subscribe("homeassistant/#");
 }
 
-mqttClient.on('message', function (topic, rawMessage) {
-    try {
-        var msg = rawMessage.toString();
-        console.log("Received MQTT topic: " + topic.toString());
 
-        if (topic === "homeassistant/status") {
-            // Turn off radio player when TV is turned on
-            if (msg === "online") {
-                for (var i = 0; i < data.Circuits.length; i++) {
-                    ha_mqtt_send_conf(i);
-                }
-            }
-            console.log("Received message: " + msg);
-            return;
-        }
-
-        
-    } catch (e) {
-        console.log(e);
-    }
-});
 
 var ha_mqtt_send_conf = function(id) {
     if (mqttClient != null && mqttConnected == true) {
@@ -253,7 +254,7 @@ var ha_mqtt_send_conf = function(id) {
             mqttClient.publish('homeassistant/sensor/PiPowerMeter/' + id + '/config', json.stringify());
         }
         catch (err) {
-            console.error("Error writing to MQTT server: " + data.MqttServer + ".  Error: " + err);
+            console.error("Error writing configuration to MQTT server: ");
         }
     }
 }
